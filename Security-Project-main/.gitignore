@@ -1,0 +1,10 @@
+# Root
+/.idea
+/.vscode
+
+
+# Email Spoofing Detection
+/Email spoofing detection/UI/.idea
+/Email spoofing detection/UI/node_modules
+
+# Email Spoofing Detection

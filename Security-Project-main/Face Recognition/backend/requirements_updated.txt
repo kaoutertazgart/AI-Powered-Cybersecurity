@@ -1,0 +1,23 @@
+# ── Unchanged from original backend/requirements.txt ──────────────────────
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+sqlalchemy==2.0.35
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-multipart==0.0.12
+numpy==1.26.4
+Pillow==10.4.0
+opencv-python-headless==4.10.0.84
+
+# ── Model layer (keeps deepface, upgrades detector) ────────────────────────
+deepface==0.0.93          # same version — ArcFace model included
+tf-keras==2.17.0          # same version
+tensorflow==2.17.0        # same version
+
+# ── New: RetinaFace detector (replaces opencv Haar cascade) ───────────────
+# RetinaFace is now bundled inside deepface 0.0.93+ — no extra install needed.
+# If deepface can't find it, install explicitly:
+# retina-face==0.0.17
+
+# ── Unchanged ─────────────────────────────────────────────────────────────
+scipy==1.11.4              # used internally by deepface for distance metrics

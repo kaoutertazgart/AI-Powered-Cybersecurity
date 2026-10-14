@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Email Spoofing Detector",
+  "version": "0.1",
+  "description": "Detects potential phishing attempts in emails",
+  "permissions": ["activeTab", "scripting", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

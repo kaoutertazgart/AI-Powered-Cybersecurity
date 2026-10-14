@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Email Spoofing Detector",
+  "version": "0.1",
+  "description": "Detects potential phishing attempts in emails",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzxuEFW9OiSbdUqHYGKM0tkpQqRo0yAEX4y15H1WBz/beUskAZ9JA6g2DJCGeFK8n73gi7uViYeTLVuvlQWpu3nAAb3uw6pI6/xx/93ZR/aF/SopdcpllVzSW8xKMc70M9kU8ThTtsqwV7Ftr7IipryRO4GntUscAmtxFHhc0CafGFm0XVp5nL0kL1ZIlZBR1pQi+qFgpRXn6qeTp6wnE0Odp1LgcN6P9uYSTS45kFA0KU+SxOkm1swL72wJxjgIuIXh4SZipjhqgc0ZufFckkHQrLrWybfAjPYM6MRa3Z/VIVUq2jj6qIIBd28mvY2hLEXACIgQ+0E/6OapZTv5bIwIDAQAB",
+
+  "host_permissions": [
+    "*://mail.google.com/*",
+    "https://gmail.googleapis.com/*",
+    "http://localhost:5000/*"
+  ],
+
+  "permissions": ["identity", "activeTab", "scripting", "tabs"],
+  "oauth2": {
+    "client_id": "569792691071-ammkkdatkq4dlbobg39m9nd8qk3l0bip.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://mail.google.com/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["modules/content/*.js"],
+      "matches": ["*://mail.google.com/*"]
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "UI/images/icon16.png",
+      "48": "UI/images/icon48.png",
+      "128": "UI/images/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "UI/images/icon16.png",
+    "48": "UI/images/icon48.png",
+    "128": "UI/images/icon128.png"
+  }
+
+}

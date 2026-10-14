@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Phishing Detector</title>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+  />
+  <style>
+    * {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      width: 400px;
+      padding: 15px;
+      background: #f8f9fa;
+    }
+
+    #analyzeBtn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #43bbda;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 5px 0 #007998;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #analyzeBtn:hover {
+      background: #00c4f6;
+    }
+
+    #analyzeBtn:active {
+      background: #00c4f6;
+      box-shadow: none;
+      transform: translateY(5px);
+    }
+    #analyzeBtn:disabled {
+      background: #656565;
+      box-shadow: 0 5px 0 #393939;
+    }
+
+    #emailClientStatus {
+      margin: 10px 0 14px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      border: 1px solid transparent;
+    }
+
+    #emailClientStatus.detected {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border-color: #c8e6c9;
+    }
+
+    #emailClientStatus.not-detected {
+      background-color: #fff3e0;
+      color: #ef6c00;
+      border-color: #ffe0b2;
+    }
+
+    #emailClientIcon {
+      width: 13%;
+      object-fit: contain;
+      margin-right: 7px;
+      display: block;
+    }
+
+    #status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+    #status.info { background: #e8f0fe; color: #1a73e8; }
+    #status.success { background: #e6f4ea; color: #137333; }
+    #status.error { background: #fce8e6; color: #c5221f; }
+    #raw {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      display: none;
+      max-height: 300px;
+      overflow: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .tabs {
+      display: none;
+      margin-top: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+    .tabs.visible {display: flex;}
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background: #f1f1f1;
+    }
+
+    .tab-btn.active {
+      background: #4285f4;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 10px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+    th, td {padding: 8px;border-bottom: 1px solid #ddd;}
+    th {background: #f0f0f0;}
+    h3 {margin-top: 15px;margin-bottom: 10px;color: #333;}
+    ul {margin: 5px 0;padding-left: 20px;}
+    li {color: #c5221f;margin: 5px 0;}
+  </style>
+</head>
+
+<body>
+  <div style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+          ">
+    <img src="./UI/images/icon128.png" style="height: 60px" alt="Extension Icon" />
+    <h1>Email Spoofing Detector</h1>
+  </div>
+
+  <div id="emailClientStatus">
+    <div style="display: flex; margin: 10px 0; font-size: 20px; align-items: center; justify-content: center;">
+      <img id="emailClientIcon" alt="Email Client Icon" />
+      <span id="statusIcon"></span>
+    </div>
+    <span id="emailClientText"></span>
+  </div>
+
+  <button id="analyzeBtn" class="analyze-btn">Analyze Current Email</button>
+  <div id="status"></div>
+
+  <div class="tabs">
+    <button id="headerTabButton"  class="tab-btn active"  data-tab="headerTab">Header</button>
+    <button id="contentTabButton" class="tab-btn"         data-tab="contentTab">Content</button>
+  </div>
+
+  <div id="headerTab" class="tab-content active">
+    <div id="headerDetails"></div>
+    <pre id="raw"></pre>
+  </div>
+  <div id="contentTab" class="tab-content">
+    <div id="contentDetails"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
